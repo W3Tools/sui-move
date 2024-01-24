@@ -32,4 +32,17 @@ module gmsui::bytes32 {
 
         v
     }
+
+    public fun from_double_vector_u8(data: vector<vector<u8>>): vector<Bytes32> {
+        let length = vector::length(&data);
+        let v = vector::empty<Bytes32>();
+
+        let i = 0;
+        while (i < length) {
+            vector::push_back(&mut v, from_vector(*vector::borrow(&data, i)));
+            i = i + 1;
+        };
+
+        v
+    }
 }
