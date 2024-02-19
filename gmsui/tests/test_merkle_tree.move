@@ -281,6 +281,91 @@ module gmsui::test_merkle_tree {
             assert!(target_leaf == this_leaf, 0);
             assert!(merkle_tree::verify(proof, merkle_root, this_leaf), 0);
         };
+    }
 
+    use sui::ed25519;
+
+    #[test]
+    fun test_ed25519_signature_should_be_verified() {
+        {
+            let message = x"315f5bdb76d078c43b8ac0064e4a0164612b1fce77c869345bfc94c75894edd3";
+            let public_key = x"cc62332e34bb2d5cd69f60efbb2a36cb916c7eb458301ea36636c4dbb012bd88";
+            let signature = x"cce72947906dbae4c166fc01fd096432784032be43db540909bc901dbc057992b4d655ca4f4355cf0868e1266baacf6919902969f063e74162f8f04bc4056105";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = vector<u8>[49,95,91,219,118,208,120,196,59,138,192,6,78,74,1,100,97,43,31,206,119,200,105,52,91,252,148,199,88,148,237,211];
+            let public_key = vector<u8>[204,98,51,46,52,187,45,92,214,159,96,239,187,42,54,203,145,108,126,180,88,48,30,163,102,54,196,219,176,18,189,136];
+            let signature = vector<u8>[204,231,41,71,144,109,186,228,193,102,252,1,253,9,100,50,120,64,50,190,67,219,84,9,9,188,144,29,188,5,121,146,180,214,85,202,79,67,85,207,8,104,225,38,107,170,207,105,25,144,41,105,240,99,231,65,98,248,240,75,196,5,97,5];
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = vector<u8>[49,95,91,219,118,208,120,196,59,138,192,6,78,74,1,100,97,43,31,206,119,200,105,52,91,252,148,199,88,148,237,211];
+            let public_key = vector<u8>[152,33,16,52,204,86,125,121,179,45,228,82,181,80,252,110,139,141,255,36,17,133,56,28,163,59,161,154,106,109,135,140];
+            let signature = vector<u8>[183,202,217,128,127,94,48,189,171,148,229,91,169,221,166,56,122,248,169,255,117,111,34,177,180,159,231,254,53,86,169,196,11,142,87,246,203,20,208,141,68,191,163,155,54,104,18,32,102,161,192,32,20,27,146,255,173,231,239,207,145,37,167,15];
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"315f5bdb76d078c43b8ac0064e4a0164612b1fce77c869345bfc94c75894edd3";
+            let public_key = x"98211034cc567d79b32de452b550fc6e8b8dff241185381ca33ba19a6a6d878c";
+            let signature = x"b7cad9807f5e30bdab94e55ba9dda6387af8a9ff756f22b1b49fe7fe3556a9c40b8e57f6cb14d08d44bfa39b3668122066a1c020141b92ffade7efcf9125a70f";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"315f5bdb76d078c43b8ac0064e4a0164612b1fce77c869345bfc94c75894edd3";
+            let public_key = x"e6ae1aab8a0a7acb4cdb1b4ce960dcc672d0d619ba3dcc53cb9f32ca59a7d587";
+            let signature = x"ca2a7936615e719e3baca72fdcf6dc6e6e025c9c1792147979b5fc2460bf7393cade8582551a1cab7c3ea00eb5c50e5f83c6d26afb216f146cb79ffe0d50fc0e";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"6ec96835d83c431d5387ba31dbfcae1e1eba1e5d7db70ef31dbb7dc1e583c690";
+            let public_key = x"e6ae1aab8a0a7acb4cdb1b4ce960dcc672d0d619ba3dcc53cb9f32ca59a7d587";
+            let signature = x"f3f192124b8f7d75ce15da6c336550b98b9a0b0204997dfa2669453ba0d45ae2857939a10c8660e96bf53091d83b3a2377c0615941bec4a45e93a7a748aa3c07";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"b3a82fa7909fb9c9add005616e4024f8bc85a484a5623d44762db301cb2ad2d3";
+            let public_key = x"e6ae1aab8a0a7acb4cdb1b4ce960dcc672d0d619ba3dcc53cb9f32ca59a7d587";
+            let signature = x"1adf123edf4b2f9b6b1a3078a068d1357067eb83eb5240fcc2fe3cc92c0b2570c51ad2d255cf82195dd33b3fd1a005d894d8d06b73002ebb9be2b360afec8602";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"8635a944b059f419f54fa878270e310af8151249018ff3d26ec7b07c361041b1000000000000000000000000000000000000000000000000000000e8d4a51000";
+            let public_key = x"e6ae1aab8a0a7acb4cdb1b4ce960dcc672d0d619ba3dcc53cb9f32ca59a7d587";
+            let signature = x"eef0a352f38390920433b2d554de4fcf11bc605238f64e47c83ae63b73a1c3acc4c866630ef4b38369cde9c4169582af7df676cc9f796c32d33b68897743e70e";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
+
+        {
+            let message = x"73d69ebe6c233cb63a2f664c86030807618083af37b7f77342791999f56d0d49";
+            let public_key = x"e6ae1aab8a0a7acb4cdb1b4ce960dcc672d0d619ba3dcc53cb9f32ca59a7d587";
+            let signature = x"798bfcd6c9d9326d8244b21823d63fc659225c330a3ec16383185a22da83643f1b83ea68adde2cad95196fd5c0fd0f0ab841a21c98746efeeaa4ffdb2c5a2c01";
+            let v = ed25519::ed25519_verify(&signature, &public_key, &message);
+            std::debug::print(&v);
+            assert!(v == true, 0);
+        };
     }
 }
